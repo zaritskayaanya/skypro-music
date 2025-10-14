@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './Bar.module.css';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 export default function Bar() {
   return (
