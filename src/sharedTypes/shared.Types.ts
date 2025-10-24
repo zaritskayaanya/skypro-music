@@ -1,3 +1,4 @@
+
 export interface TrackTypes {
   _id: number;
   name: string;
@@ -9,18 +10,4 @@ export interface TrackTypes {
   logo: null;
   track_file: string;
   stared_user: string[];
-}
-
-export interface FilterItemProps {
-  items: string[];
-  onSelectItem: (item: string) => void;
-}
-
-export interface FilterProps {
-  data: TrackTypes[];
-  // onFilterChange: (filters: {
-  //   author?: string;
-  //   genre?: string[];
-  //   release_date?: number;
-  // }) => void;
 }
