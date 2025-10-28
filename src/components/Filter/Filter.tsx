@@ -4,8 +4,12 @@ import { useState } from 'react';
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
 import { getUniqueValueByKey } from '../../utils/helpers';
-import { FilterProps, TrackTypes } from '../../sharedTypes/shared.Types';
+import { TrackTypes } from '../../sharedTypes/shared.Types';
 import classNames from 'classnames';
+
+interface FilterProps {
+  data: TrackTypes[];
+}
 
 export default function Filter({ data }: FilterProps) {
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
