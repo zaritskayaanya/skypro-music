@@ -1,0 +1,85 @@
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/Logo.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/dislike.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/like.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/next.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/note.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/pause.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/play.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/prev.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/repeat.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/search.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/shuffle.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/sprite.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/volume.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/img/icon/watch.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/100danceHit/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/globals.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/indi/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/myTracks/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/not-found.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/playlistDay/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/signIn/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/signIn/signin.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/signUp/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/signUp/signup.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Bar/Bar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Bar/bar.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/CenterBlock/CenterBlock.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/CenterBlock/centerBlock.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Filter/Filter.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Filter/filter.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/FilterItem/FilterItem.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/FilterItem/filterItem.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Nav/Nav.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Nav/nav.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Search/Search.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Search/search.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/SideBar/SideBar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/SideBar/siteBar.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Track/Track.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Track/track.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/data.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/sharedTypes/shared.Types.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/store/ReduxProvider.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/store/features/trackSlice.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/store/store.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/utils/helpers.ts', LF will be replaced by CRLF the next time Git touches it
+package-lock.json
+package.json
+public/img/icon/pause.svg
+src/app/100danceHit/page.tsx
+src/app/indi/page.tsx
+src/app/layout.tsx
+src/app/myTracks/page.tsx
+src/app/not-found.tsx
+src/app/page.css
+src/app/page.module.css
+src/app/page.tsx
+src/app/playlistDay/page.tsx
+src/app/signIn/page.tsx
+src/app/signIn/signin.module.css
+src/app/signUp/page.tsx
+src/app/signUp/signup.module.css
+src/components/Bar/Bar.tsx
+src/components/Bar/bar.module.css
+src/components/CenterBlock/CenterBlock.tsx
+src/components/CenterBlock/centerBlock.module.css
+src/components/Filter/Filter.tsx
+src/components/Filter/filter.module.css
+src/components/FilterItem/FilterItem.tsx
+src/components/Nav/Nav.tsx
+src/components/Nav/nav.module.css
+src/components/SideBar/SideBar.tsx
+src/components/SideBar/siteBar.module.css
+src/components/Track/Track.tsx
+src/components/Track/track.module.css
+src/sharedTypes/shared.Types.ts
+src/store/ReduxProvider.tsx
+src/store/features/trackSlice.ts
+src/store/store.ts
