@@ -16,6 +16,13 @@
   flex-direction: column;
 }
 
+.bar__TimeTrack {
+  position: absolute;
+  top: -25px;
+  right: 15px;
+  color: #ffffff;
+}
+
 .bar__playerProgress {
   width: 100%;
   height: 5px;
@@ -291,42 +298,6 @@
   fill: transparent;
 }
 
-.volume__progress {
-  width: 109px;
-  display: flex;
-  align-items: center;
-}
-
-.volume__progressLine {
-  width: 100%;
-  height: 2px;
-  appearance: none;
-  background: #797979;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
-
-.volume__progressLine::-webkit-slider-runnable-track {
-  height: 2px;
-  background: #797979;
-  border-radius: 5px;
-}
-
-.volume__progressLine::-webkit-slider-thumb {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: #1a1a1a;
-  border: 2px solid white;
-  border-radius: 50%;
-  position: relative;
-  margin-top: -7px;
-}
-.btn {
-  cursor: pointer;
-}
-
 .btnIcon:hover svg {
   fill: transparent;
   stroke: #acacac;
@@ -334,6 +305,12 @@
 }
 
 .btnIcon:active svg {
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
+}
+
+._active {
   fill: transparent;
   stroke: #ffffff;
   cursor: pointer;
