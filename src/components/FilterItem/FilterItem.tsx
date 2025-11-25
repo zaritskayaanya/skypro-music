@@ -1,5 +1,9 @@
-import { FilterItemProps } from '../../sharedTypes/shared.Types';
 import styles from './filterItem.module.css';
+
+interface FilterItemProps {
+  items: string[];
+  onSelectItem: (item: string) => void;
+}
 
 export default function FilterItemexport({
   items,

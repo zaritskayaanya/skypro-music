@@ -8,6 +8,15 @@ export function formatTime(time: number) {
   return `${minuts} : ${outInputSeconds}`;
 }
 
+export const getTimePanel = (
+  currentTime: number,
+  totalTime: number | undefined,
+) => {
+  if (totalTime) {
+    return `${formatTime(currentTime)} / ${formatTime(totalTime)}`;
+  }
+};
+
 export function getUniqueValueByKey(
   arr: TrackTypes[],
   key: keyof TrackTypes,
