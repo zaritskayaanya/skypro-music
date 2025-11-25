@@ -3,15 +3,18 @@
 import { useState } from 'react';
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
-import { getUniqueValueByKey } from '../../utils/helpers';
+import {
+  getUniqueReleaseYears,
+  getUniqueValueByKey,
+} from '../../utils/helpers';
 import { TrackTypes } from '../../sharedTypes/shared.Types';
 import classNames from 'classnames';
 
 interface FilterProps {
-  data: TrackTypes[];
+  tracks: TrackTypes[];
 }
 
-export default function Filter({ data }: FilterProps) {
+export default function Filter({ tracks }: FilterProps) {
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [isYearModalOpen, setIsYearModalOpen] = useState(false);
   const [isGenreModalOpen, setIsGenreModalOpen] = useState(false);
@@ -26,16 +29,11 @@ export default function Filter({ data }: FilterProps) {
     setIsGenreModalOpen(false);
   };
 
-  const authors = getUniqueValueByKey(data, 'author');
+  const authors = getUniqueValueByKey(tracks, 'author');
 
-  const releaseYears = getUniqueValueByKey(
-    data,
-    'release_date' as keyof TrackTypes,
-  )
-    .map(Number)
-    .sort((a, b) => a - b);
+  const releaseYears = getUniqueReleaseYears(tracks);
 
-  const genres = getUniqueValueByKey(data, 'genre');
+  const genres = getUniqueValueByKey(tracks, 'genre');
 
   const handleSelectAuthor = (author: string) => {
     setSelectedAuthor(author);

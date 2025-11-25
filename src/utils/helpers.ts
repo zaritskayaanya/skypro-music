@@ -45,3 +45,33 @@ export function getUniqueValueByKey(
   //Преобразуем обратно в массив
   return Array.from(uniqueValues);
 }
+
+export function getUniqueReleaseYears(arr: TrackTypes[]): number[] {
+  const uniqueYears = new Set<number>();
+
+  arr.forEach((item) => {
+    const dateString = item.release_date;
+    if (dateString) {
+      try {
+        const date = new Date(dateString);
+        if (!isNaN(date.getTime())) {
+          // Проверяем, что дата валидна
+          const year = date.getFullYear();
+          uniqueYears.add(year);
+        } else {
+          const parts = dateString.split('-');
+          if (parts.length > 0 && parts[0].length === 4) {
+            const year = parseInt(parts[0], 10);
+            if (!isNaN(year)) {
+              uniqueYears.add(year);
+            }
+          }
+        }
+      } catch (e) {
+        console.error(`Ошибка: ${dateString}`, e);
+      }
+    }
+  });
+
+  return Array.from(uniqueYears).sort((a, b) => a - b);
+}
