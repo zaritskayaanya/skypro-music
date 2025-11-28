@@ -4,16 +4,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './nav.module.css';
 import { useState } from 'react';
+import { useAppDispatch } from '../../store/store';
+import { logout } from '../../store/features/authSlice';
+import { useRouter } from 'next/navigation';
 
 export default function Nav() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  function handleLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    e.preventDefault();
+    dispatch(logout());
+    router.push('/auth/signIn');
+  }
+
   return (
     <nav className={styles.main__nav}>
-      <Link href="/">
+      <Link href="/music/main">
         <div className={styles.nav__logo}>
           <Image
             width={250}
@@ -33,17 +46,21 @@ export default function Nav() {
         <div className={styles.nav__menu}>
           <ul className={styles.menu__list}>
             <li className={styles.menu__item}>
-              <Link href="/" className={styles.menu__link}>
+              <Link href="/music/main" className={styles.menu__link}>
                 Главное
               </Link>
             </li>
             <li className={styles.menu__item}>
-              <Link href="/myTracks" className={styles.menu__link}>
+              <Link href="/music/categories/2" className={styles.menu__link}>
                 Мои треки
               </Link>
             </li>
             <li className={styles.menu__item}>
-              <Link href="../signin.html" className={styles.menu__link}>
+              <Link
+                onClick={handleLogout}
+                href="/auth/signIn"
+                className={styles.menu__link}
+              >
                 Выйти
               </Link>
             </li>

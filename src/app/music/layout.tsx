@@ -1,20 +1,24 @@
+import { ReactNode } from 'react';
+import styles from './layout.module.css';
 import Bar from '../../components/Bar/Bar';
-import CenterBlock from '../../components/CenterBlock/CenterBlock';
 import Nav from '../../components/Nav/Nav';
 import SideBar from '../../components/SideBar/SideBar';
-import styles from '../page.module.css';
 
-export default function DanceHit() {
+interface LayoutAuthProps {
+  children: ReactNode;
+}
+
+export default function LayoutMusic({ children }: LayoutAuthProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
           <Nav />
-          <CenterBlock />
+          {children}
           <SideBar />
         </main>
         <Bar />
-        <footer className="footer"></footer>
+        <footer></footer>
       </div>
     </div>
   );
