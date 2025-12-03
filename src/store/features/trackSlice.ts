@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TrackTypes } from '../../sharedTypes/shared.Types';
 
-type initialStateType = {
+interface TrackSliceState {
   currentTrack: TrackTypes | null;
   isPlay: boolean;
   playList: TrackTypes[];
   isShuffle: boolean;
-  shaffledPlayList: TrackTypes[];
-};
+  shuffledPlayList: TrackTypes[];
+}
 
-const initialState: initialStateType = {
+const initialState: TrackSliceState = {
   currentTrack: null,
   isPlay: false,
   playList: [],
   isShuffle: false,
-  shaffledPlayList: [],
+  shuffledPlayList: [],
 };
 
 const trackSlice = createSlice({
@@ -26,35 +26,46 @@ const trackSlice = createSlice({
     },
     setCurrentTrackList: (state, action: PayloadAction<TrackTypes[]>) => {
       state.playList = action.payload;
-      state.shaffledPlayList = [...state.playList].sort(
-        () => Math.random() - 0.5,
-      );
+      state.shuffledPlayList = [...state.playList].sort(() => Math.random() - 0.5);
     },
 
     setNextTrack: (state) => {
       const playlist = state.isShuffle
-        ? state.shaffledPlayList
+        ? state.shuffledPlayList
         : state.playList;
-      const curInd = playlist.findIndex(
-        (el) => el._id === state.currentTrack?._id,
+
+      const currentIndex = playlist.findIndex(
+        (track) => track._id === state.currentTrack?._id
       );
-      if (curInd === -1 || curInd === state.playList.length - 1) return;
-      const nextInd = curInd + 1;
-      state.currentTrack = state.playList[nextInd];
+
+      if (currentIndex === -1 || currentIndex === playlist.length - 1) {
+        return;
+      }
+
+      const nextIndex = currentIndex + 1;
+      state.currentTrack = playlist[nextIndex];
     },
     setPrevTrack: (state) => {
       const playlist = state.isShuffle
-        ? state.shaffledPlayList
+        ? state.shuffledPlayList
         : state.playList;
-      const curInd = playlist.findIndex(
-        (el) => el._id === state.currentTrack?._id,
+
+      const currentIndex = playlist.findIndex(
+        (track) => track._id === state.currentTrack?._id
       );
-      if (curInd <= 0) return;
-      const prevInd = curInd - 1;
-      state.currentTrack = state.playList[prevInd];
+
+      if (currentIndex <= 0) {
+        return;
+      }
+
+      const previousIndex = currentIndex - 1;
+      state.currentTrack = playlist[previousIndex];
     },
     toggleShuffle: (state) => {
       state.isShuffle = !state.isShuffle;
+      if (state.isShuffle) {
+        state.shuffledPlayList = [...state.playList].sort(() => Math.random() - 0.5);
+      }
     },
     setIsPlay: (state, action: PayloadAction<boolean>) => {
       state.isPlay = action.payload;
@@ -70,4 +81,5 @@ export const {
   toggleShuffle,
   setPrevTrack,
 } = trackSlice.actions;
+
 export const trackSliceReducer = trackSlice.reducer;
