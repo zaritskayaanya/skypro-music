@@ -2,71 +2,71 @@
 
 import Link from 'next/link';
 import styles from './track.module.css';
-import classNames from 'classnames';
 import { formatTime } from '../../utils/helpers';
 import { TrackTypes } from '../../sharedTypes/shared.Types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setCurrentTrack, setCurrentTrackList, setIsPlay } from '../../store/features/trackSlice';
 
-interface trackTypeProp {
+interface TrackProps {
   track: TrackTypes;
-  playList:TrackTypes[];
+  playList: TrackTypes[];
 }
 
-export default function Track({ track, playList }: trackTypeProp) {
+export default function Track({ track, playList }: TrackProps) {
   const dispatch = useAppDispatch();
-  const isPlay = useAppSelector((state) => state.tracks.isPlay);
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  const currentTrackId = useAppSelector(
-    (state) => state.tracks.currentTrack?._id,
-  );
+  const isPlaying = useAppSelector((state) => state.tracks.isPlay);
+  const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id);
+
+  const isCurrentTrack = currentTrackId === track._id;
+  const displayDot = isCurrentTrack && isPlaying;
 
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
+    dispatch(setCurrentTrackList(playList));
     dispatch(setIsPlay(true));
-    dispatch(setCurrentTrackList(playList))
   };
-
-  const shouldShowPlayingDot = currentTrack && currentTrackId === track._id;
 
   return (
     <div className={styles.playlist__item} onClick={onClickTrack}>
       <div className={styles.playlist__track}>
+        {/* Название трека */}
         <div className={styles.track__title}>
           <div className={styles.track__titleImage}>
-            <svg
-              className={classNames(styles.track__titleSvg, {
-                [isPlay ? styles.playing_dot : styles.static_dot]:
-                  shouldShowPlayingDot,
-              })}
-            >
-              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-            </svg>
+            {displayDot ? (
+              <span className={styles.playing_dot}></span>
+            ) : (
+              <svg className={styles.track__titleSvg}>
+                <use xlinkHref="/img/icon/sprite.svg#icon-note" />
+              </svg>
+            )}
           </div>
 
-          <div className="track__title-text">
-            <Link className={styles.track__titleLink} href="">
-              {track.name}
-              <span className={styles.track__titleSpan}></span>
-            </Link>
-          </div>
+          <Link href={`/track/${track._id}`} className={styles.track__titleLink}>
+            {track.name}
+          </Link>
         </div>
+
+        {/* Исполнитель */}
         <div className={styles.track__author}>
-          <Link className={styles.track__authorLink} href="">
-            {track.author}
+          <Link href={`/artist/${track.author?._id || '#'}`} className={styles.track__authorLink}>
+            {track.author?.name || 'Неизвестный исполнитель'}
           </Link>
         </div>
+
+        {/* Альбом */}
         <div className={styles.track__album}>
-          <Link className={styles.track__albumLink} href="">
-            {track.album}
+          <Link href={`/album/${track.album?._id || '#'}`} className={styles.track__albumLink}>
+            {track.album?.name || 'Без альбома'}
           </Link>
         </div>
+
+        {/* Длительность + лайк (иконка времени) */}
         <div className={styles.track__time}>
           <svg className={styles.track__timeSvg}>
-            <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-like" />
           </svg>
           <span className={styles.track__timeText}>
-            {formatTime(track.duration_in_seconds)}{' '}
+            {formatTime(track.duration_in_seconds)}
           </span>
         </div>
       </div>

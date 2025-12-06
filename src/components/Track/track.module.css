@@ -2,36 +2,30 @@
   width: 100%;
   display: block;
   margin-bottom: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.playlist__item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
 .playlist__track {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
+  padding: 8px 0;
 }
 
 .track__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
+  gap: 17px;
   width: 447px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .track__titleImage {
@@ -39,17 +33,16 @@
   height: 51px;
   padding: 16px;
   background: #313131;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  margin-right: 17px;
-   position: relative;
+  border-radius: 8px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.track__titleImage.playing {
+  background: #1db954;
 }
 
 .track__titleSvg {
@@ -57,6 +50,11 @@
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+  transition: stroke 0.2s ease;
+}
+
+.track__titleImage:hover .track__titleSvg {
+  stroke: #ffffff;
 }
 
 .track__titleLink {
@@ -65,6 +63,11 @@
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
 }
 
 .track__titleSpan {
@@ -77,12 +80,9 @@
 
 .track__author {
   width: 321px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
+  max-width: 100%;
 }
 
 .track__authorLink {
@@ -91,11 +91,20 @@
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
-  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.track__authorLink:hover {
+  text-decoration: underline;
 }
 
 .track__album {
   width: 245px;
+  max-width: 100%;
 }
 
 .track__albumLink {
@@ -104,14 +113,30 @@
   font-size: 16px;
   line-height: 24px;
   color: #696969;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+.track__albumLink:hover {
+  color: #b3b3b3;
+}
+
+.track__time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
 .track__timeSvg {
   width: 14px;
   height: 12px;
-  margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  flex-shrink: 0;
 }
 
 .track__timeText {
@@ -119,22 +144,39 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  text-align: right;
   color: #696969;
 }
 
+/* Анимация точки воспроизведения */
 .playing_dot {
   width: 16px;
   height: 16px;
   background-color: #b672ff;
-  border-radius: 8px;
-  display: block;
+  border-radius: 50%;
   animation: bubble_out 0.6s ease-in-out infinite both;
+  display: none;
+  cursor: pointer
+}
+
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.like-btn:hover {
+  transform: scale(1.2);
 }
 
 @keyframes bubble_out {
-  0%,
-  to {
+  0%, to {
     transform: scale(0.5);
   }
   50% {
@@ -142,11 +184,28 @@
   }
 }
 
-.static_dot {
-  width: 16px;
-  height: 16px;
-  background-color: #b672ff;
-  border-radius: 8px;
-  display: block;
+/* Адаптивность — для экранов меньше 768px */
+@media (max-width: 768px) {
+  .track__title, .track__author, .track__album {
+    width: auto;
+    min-width: 120px;
+  }
 
+  .track__title {
+    width: 40%;
+    gap: 10px;
+  }
+
+  .track__author {
+    width: 35%;
+  }
+
+  .track__album {
+    width: 25%;
+    font-size: 14px;
+  }
+
+  .track__timeText {
+    font-size: 14px;
+  }
 }
