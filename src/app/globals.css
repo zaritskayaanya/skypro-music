@@ -23,3 +23,15 @@ a {
 ul {
   list-style-type: none;
 }
+/* Полное отключение переводчика */
+[data-ya-translate] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+[translate="no"] {
+  translate: none !important;
+}
+
+* {
+  translate: none !important;}
