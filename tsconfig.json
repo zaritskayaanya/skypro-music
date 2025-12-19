@@ -19,10 +19,46 @@
       }
     ],
     "paths": {
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"]
-    }
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@sharedTypes/*": ["./src/sharedTypes/*"],
+      "@store/*": ["./src/store/*"]
+    },
+    "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/sharedTypes"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "dist",
+    "coverage",
+    
+    // КРИТИЧНО: исключаем временные файлы и папки истории
+    "AppData",
+    "**/AppData/**",
+    "**/.*/**",
+    "**/*.history/**",
+    "**/History/**",
+    "**/.vscode/**",
+    "**/.idea/**",
+    
+    // Тестовые файлы
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    
+    // Конфигурационные файлы
+    "**/jest.config.*",
+    "**/webpack.config.*",
+    "**/vite.config.*"
+  ]
 }

@@ -42,6 +42,27 @@
   -ms-flex-direction: column;
   flex-direction: column;
   overflow-y: auto;
+  max-height: 500px; /* Добавлено: ограничение высоты для скролла */
+  scrollbar-width: thin; /* Современные браузеры */
+}
+
+/* Кастомный скроллбар для WebKit браузеров */
+.content__playlist::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content__playlist::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.content__playlist::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.content__playlist::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .playlistTitle__col {
@@ -76,4 +97,238 @@
 .col04 {
   width: 60px;
   text-align: end;
+}
+
+.playlist__item {
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer; /* Добавлено: курсор при наведении на строку трека */
+  transition: background-color 0.2s ease;
+}
+
+.playlist__item:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Лёгкий hover-эффект */
+}
+
+.playlist__track {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.track__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 447px;
+}
+
+.track__titleImage {
+  width: 51px;
+  height: 51px;
+  padding: 16px;
+  background: #313131;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: 17px;
+}
+
+.track__titleSvg {
+  width: 18px;
+  height: 17px;
+  fill: transparent;
+  stroke: #4e4e4e;
+}
+
+.track__titleLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer; /* Добавлено: курсор для ссылки */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.track__titleLink:hover {
+  color: #1db954; /* Цвет при наведении (как в Spotify) */
+  text-decoration: underline;
+}
+
+.track__titleSpan {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4e4e4e;
+}
+
+.track__author {
+  width: 321px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.track__authorLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  text-align: left;
+  cursor: pointer; /* Добавлено: курсор для ссылки */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.track__authorLink:hover {
+  color: #1db954;
+  text-decoration: underline;
+}
+
+.track__album {
+  width: 245px;
+}
+
+.track__albumLink {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #696969;
+  cursor: pointer; /* Добавлено: курсор для ссылки */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.track__albumLink:hover {
+  color: #1db954;
+  text-decoration: underline;
+}
+
+.track__time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  min-width: 60px; /* Фиксированная ширина для выравнивания */
+}
+
+.track__timeSvg {
+  width: 14px;
+  height: 12px;
+  margin-right: 8px; /* Уменьшен отступ для лучшего позиционирования */
+  fill: transparent;
+  stroke: #696969;
+  cursor: pointer; /* Добавлено: курсор для иконки лайка */
+  transition: stroke 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0; /* Предотвращает сжатие */
+}
+
+.track__timeSvg:hover {
+  stroke: #ff4757; /* Красный цвет при наведении (как лайк) */
+  transform: scale(1.1);
+}
+
+.track__timeText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #696969;
+  min-width: 40px; /* Фиксированная ширина для времени */
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 1200px) {
+  .centerblock {
+    padding: 20px 20px 20px 90px;
+  }
+  
+  .col01 { width: 350px; }
+  .col02 { width: 250px; }
+  .col03 { width: 200px; }
+  .col04 { width: 50px; }
+  
+  .track__title { width: 350px; }
+  .track__author { width: 250px; }
+  .track__album { width: 200px; }
+}
+
+@media (max-width: 768px) {
+  .centerblock {
+    padding: 15px;
+  }
+  
+  .centerblock__h2 {
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 25px;
+  }
+  
+  .content__title {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .playlistTitle__col {
+    font-size: 12px;
+  }
+  
+  .col01, .col02, .col03, .col04 {
+    width: auto;
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .playlist__track {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .track__title,
+  .track__author,
+  .track__album {
+    width: 100% !important;
+  }
+  
+  .content__playlist {
+    max-height: 400px; /* Уменьшаем высоту на мобильных */
+  }
 }

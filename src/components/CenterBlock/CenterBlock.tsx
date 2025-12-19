@@ -1,43 +1,123 @@
-import styles from './centerBlock.module.css';
-import Search from '../Search/Search';
-import Filter from '../Filter/Filter';
-import classNames from 'classnames';
-import Track from '../Track/Track';
-import { TrackTypes } from '../../sharedTypes/shared.Types';
+"use client";
 
-interface CenterBLockProps {
-  tracks:TrackTypes[],
-  title: string
-}
+import { useState } from "react";
+import styles from "./filter.module.css";
+import FilterItem from "../FilterItem/FilterItem";
+import { getUniqueValueByKey } from "../../utils/helpers";
+import { FilterProps, TrackTypes } from "../../sharedTypes/shared.Types";
+import classNames from "classnames";
 
-export default function CenterBlock({tracks, title}:CenterBLockProps) {
+export default function Filter({ data }: FilterProps) {
+  const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
+  const [isYearModalOpen, setIsYearModalOpen] = useState(false);
+  const [isGenreModalOpen, setIsGenreModalOpen] = useState(false);
+
+  const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<string[] | null>(null);
+
+  const closeAllModals = () => {
+    setIsAuthorModalOpen(false);
+    setIsYearModalOpen(false);
+    setIsGenreModalOpen(false);
+  };
+
+  const authors = getUniqueValueByKey(data, "author");
+
+  const releaseYears = getUniqueValueByKey(
+    data,
+    "release_date" as keyof TrackTypes,
+  )
+    .map(Number)
+    .sort((a, b) => a - b);
+
+  const genres = getUniqueValueByKey(data, "genre");
+
+  const handleSelectAuthor = (author: string) => {
+    setSelectedAuthor(author);
+    setIsAuthorModalOpen(false);
+  };
+
+  const handleSelectYear = (year: number) => {
+    setSelectedYear(year);
+    setIsYearModalOpen(false);
+  };
+
+  const handleSelectGenre = (genre: string[]) => {
+    setSelectedGenre(genre);
+    setIsGenreModalOpen(false);
+  };
+
   return (
-    <div className={styles.centerblock}>
-      <Search />
-      <h2 className={styles.centerblock__h2}>{title}</h2>
-      <Filter tracks={tracks} />
-      <div className={styles.centerblock__content}>
-        <div className={styles.content__title}>
-          <div className={classNames(styles.playlistTitle__col, styles.col01)}>
-            Трек
-          </div>
-          <div className={classNames(styles.playlistTitle__col, styles.col02)}>
-            Исполнитель
-          </div>
-          <div className={classNames(styles.playlistTitle__col, styles.col03)}>
-            Альбом
-          </div>
-          <div className={classNames(styles.playlistTitle__col, styles.col04)}>
-            <svg className={styles.playlistTitle__svg}>
-              <use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
-            </svg>
-          </div>
-        </div>
-        <div className={styles.content__playlist}>
-          {tracks.map((track) => (
-            <Track key={track._id} track={track} playList={tracks}/>
-          ))}
-        </div>
+    <div className={styles.centerblock__filter}>
+      <div className={styles.filter__title}>Искать по:</div>
+
+      <div
+        className={classNames(styles.filter__button, {
+          [styles.active]: isAuthorModalOpen,
+        })}
+        onClick={() => {
+          if (!isAuthorModalOpen) {
+            closeAllModals();
+            setIsAuthorModalOpen(true);
+          } else {
+            setIsAuthorModalOpen(false);
+          }
+        }}
+      >
+        исполнителю
+        {isAuthorModalOpen && (
+          <FilterItem items={[...authors]} onSelectItem={handleSelectAuthor} />
+        )}
+      </div>
+
+      <div
+        className={classNames(styles.filter__button, {
+          [styles.active]: isYearModalOpen,
+        })}
+        onClick={() => {
+          if (!isYearModalOpen) {
+            closeAllModals();
+            setIsYearModalOpen(true);
+          } else {
+            setIsYearModalOpen(false);
+          }
+        }}
+      >
+        году выпуска
+        {isYearModalOpen && (
+          <FilterItem
+            items={[
+              "По умолчанию",
+              "Сначала новые",
+              "Сначала старые",
+              ...releaseYears.map(String),
+            ]}
+            onSelectItem={() => handleSelectYear}
+          />
+        )}
+      </div>
+
+      <div
+        className={classNames(styles.filter__button, {
+          [styles.active]: isGenreModalOpen,
+        })}
+        onClick={() => {
+          if (!isGenreModalOpen) {
+            closeAllModals();
+            setIsGenreModalOpen(true);
+          } else {
+            setIsGenreModalOpen(false);
+          }
+        }}
+      >
+        жанру
+        {isGenreModalOpen && (
+          <FilterItem
+            items={[...genres]}
+            onSelectItem={() => handleSelectGenre}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,20 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styles from './filter.module.css';
-import FilterItem from '../FilterItem/FilterItem';
-import {
-  getUniqueReleaseYears,
-  getUniqueValueByKey,
-} from '../../utils/helpers';
-import { TrackTypes } from '../../sharedTypes/shared.Types';
-import classNames from 'classnames';
+import { useState } from "react";
+import styles from "./filter.module.css";
+import FilterItem from "../FilterItem/FilterItem";
+import { getUniqueValueByKey } from "../../utils/helpers";
+import { FilterProps, TrackTypes } from "../../sharedTypes/shared.Types";
+import classNames from "classnames";
 
-interface FilterProps {
-  tracks: TrackTypes[];
-}
-
-export default function Filter({ tracks }: FilterProps) {
+export default function Filter({ data }: FilterProps) {
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [isYearModalOpen, setIsYearModalOpen] = useState(false);
   const [isGenreModalOpen, setIsGenreModalOpen] = useState(false);
@@ -29,11 +22,16 @@ export default function Filter({ tracks }: FilterProps) {
     setIsGenreModalOpen(false);
   };
 
-  const authors = getUniqueValueByKey(tracks, 'author');
+  const authors = getUniqueValueByKey(data, "author");
 
-  const releaseYears = getUniqueReleaseYears(tracks);
+  const releaseYears = getUniqueValueByKey(
+    data,
+    "release_date" as keyof TrackTypes
+  )
+    .map(Number)
+    .sort((a, b) => a - b);
 
-  const genres = getUniqueValueByKey(tracks, 'genre');
+  const genres = getUniqueValueByKey(data, "genre");
 
   const handleSelectAuthor = (author: string) => {
     setSelectedAuthor(author);
@@ -52,7 +50,9 @@ export default function Filter({ tracks }: FilterProps) {
 
   return (
     <div className={styles.centerblock__filter}>
-      <div className={styles.filter__title}>Искать по:</div>
+      <div className={styles.filter__title} translate="no" suppressHydrationWarning>
+        Искать по:
+      </div>
 
       <div
         className={classNames(styles.filter__button, {
@@ -66,6 +66,8 @@ export default function Filter({ tracks }: FilterProps) {
             setIsAuthorModalOpen(false);
           }
         }}
+        translate="no"
+        suppressHydrationWarning
       >
         исполнителю
         {isAuthorModalOpen && (
@@ -85,14 +87,16 @@ export default function Filter({ tracks }: FilterProps) {
             setIsYearModalOpen(false);
           }
         }}
+        translate="no"
+        suppressHydrationWarning
       >
         году выпуска
         {isYearModalOpen && (
           <FilterItem
             items={[
-              'По умолчанию',
-              'Сначала новые',
-              'Сначала старые',
+              "По умолчанию",
+              "Сначала новые",
+              "Сначала старые",
               ...releaseYears.map(String),
             ]}
             onSelectItem={() => handleSelectYear}
@@ -112,6 +116,8 @@ export default function Filter({ tracks }: FilterProps) {
             setIsGenreModalOpen(false);
           }
         }}
+        translate="no"
+        suppressHydrationWarning
       >
         жанру
         {isGenreModalOpen && (

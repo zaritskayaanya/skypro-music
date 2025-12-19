@@ -1,211 +1,242 @@
+/* Основной контейнер трека */
 .playlist__item {
-  width: 100%;
-  display: block;
-  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease;
-}
-
-.playlist__item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-}
-
-.playlist__track {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-}
-
-.track__title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 17px;
-  width: 447px;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.track__titleImage {
-  width: 51px;
-  height: 51px;
-  padding: 16px;
-  background: #313131;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  flex-shrink: 0;
+  cursor: pointer;
   position: relative;
 }
 
-.track__titleImage.playing {
-  background: #1db954;
+.playlist__item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.playlist__item:focus {
+  outline: 2px solid #1db954;
+  outline-offset: -2px;
+}
+
+.playlist__item[aria-pressed="true"] {
+  background-color: rgba(29, 185, 84, 0.1);
+}
+
+/* Внутренний контейнер трека */
+.playlist__track {
+  display: grid;
+  grid-template-columns: minmax(200px, 3fr) minmax(150px, 2fr) minmax(150px, 2fr) auto;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Название трека */
+.track__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0; /* Для корректного обрезания текста */
+}
+
+.track__titleImage {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .track__titleSvg {
-  width: 18px;
-  height: 17px;
-  fill: transparent;
-  stroke: #4e4e4e;
-  transition: stroke 0.2s ease;
+  width: 16px;
+  height: 16px;
+  fill: #666;
 }
 
-.track__titleImage:hover .track__titleSvg {
-  stroke: #ffffff;
+.playingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.playing_dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #1db954;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
 }
 
 .track__titleLink {
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
+  font-weight: 500;
+  color: #000;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 280px;
+  transition: color 0.2s ease;
 }
 
-.track__titleSpan {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #4e4e4e;
-}
-
-.track__author {
-  width: 321px;
-  display: flex;
-  justify-content: flex-start;
-  max-width: 100%;
-}
-
-.track__authorLink {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 300px;
-}
-
-.track__authorLink:hover {
+.track__titleLink:hover {
+  color: #1db954;
   text-decoration: underline;
 }
 
-.track__album {
-  width: 245px;
-  max-width: 100%;
+/* Исполнитель */
+.track__author {
+  min-width: 0;
 }
 
-.track__albumLink {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #696969;
+.track__authorLink {
+  font-size: 14px;
+  color: #666;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 220px;
+  transition: color 0.2s ease;
+}
+
+.track__authorLink:hover {
+  color: #1db954;
+  text-decoration: underline;
+}
+
+/* Альбом */
+.track__album {
+  min-width: 0;
+}
+
+.track__albumLink {
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
 }
 
 .track__albumLink:hover {
-  color: #b3b3b3;
+  color: #1db954;
+  text-decoration: underline;
 }
 
+/* Блок времени и лайка */
 .track__time {
   display: flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;
-}
-
-.track__timeSvg {
-  width: 14px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
+  justify-content: flex-end;
   flex-shrink: 0;
 }
 
-.track__timeText {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #696969;
-}
-
-/* Анимация точки воспроизведения */
-.playing_dot {
-  width: 16px;
-  height: 16px;
-  background-color: #b672ff;
-  border-radius: 50%;
-  animation: bubble_out 0.6s ease-in-out infinite both;
-  display: none;
-  cursor: pointer
-}
-
-.like-btn {
-  display: inline-flex;
+.likeButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  border-radius: 50%;
 }
 
-.like-btn:hover {
-  transform: scale(1.2);
+.likeButton:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 
-@keyframes bubble_out {
-  0%, to {
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(1);
-  }
+.likeButton:active {
+  transform: scale(0.95);
 }
 
-/* Адаптивность — для экранов меньше 768px */
+.track__timeSvg {
+  width: 16px;
+  height: 16px;
+  fill: #999;
+  transition: fill 0.2s ease;
+}
+
+.likeButton:hover .track__timeSvg {
+  fill: #ff4757;
+}
+
+.likeButton.liked .track__timeSvg {
+  fill: #ff4757;
+}
+
+.track__timeText {
+  font-size: 14px;
+  color: #999;
+  min-width: 50px;
+  text-align: right;
+}
+
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-  .track__title, .track__author, .track__album {
-    width: auto;
-    min-width: 120px;
+  .playlist__track {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
-
-  .track__title {
-    width: 40%;
-    gap: 10px;
-  }
-
-  .track__author {
-    width: 35%;
-  }
-
+  
+  .track__title,
+  .track__author,
   .track__album {
-    width: 25%;
-    font-size: 14px;
+    width: 100%;
   }
+  
+  .track__time {
+    justify-content: flex-start;
+    margin-top: 4px;
+  }
+}
 
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+  .playlist__item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .playlist__item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .track__titleLink {
+    color: #fff;
+  }
+  
+  .track__authorLink,
+  .track__albumLink {
+    color: #aaa;
+  }
+  
   .track__timeText {
-    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .track__titleSvg {
+    fill: #aaa;
+  }
+  
+  .track__timeSvg {
+    fill: #aaa;
   }
 }

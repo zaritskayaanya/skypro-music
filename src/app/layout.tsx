@@ -1,16 +1,15 @@
-import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
-import './globals.css';
-import ReduxProvider from '../store/ReduxProvider';
+import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
+import "./globals.css";
 
 const montserrat = Montserrat({
-  variable: '--font-montserrat',
-  subsets: ['latin'],
+  variable: "--font-montserrat",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'Skypro Music',
-  description: 'Music service',
+  title: "Skypro Music",
+  description: "Music service",
 };
 
 export default function RootLayout({
@@ -19,10 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ReduxProvider>
-        <body className={`${montserrat.variable}`}>{children}</body>
-      </ReduxProvider>
+    <html lang="ru" suppressHydrationWarning>
+      <body className={`${montserrat.variable}`}>{children}</body>
     </html>
   );
 }
