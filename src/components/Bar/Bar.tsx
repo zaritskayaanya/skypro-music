@@ -228,26 +228,6 @@ export default function Bar() {
                     </svg>
                   </div>
                 )}
-                {/* {isLike && <div
-                  className={classNames(
-                    styles.player__btnShuffle,
-                    styles.btnIcon,
-                  )}
-                >
-                  <svg className={styles.trackPlay__likeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                  </svg>
-                </div>}
-               { !isLike && <div
-                  className={classNames(
-                    styles.trackPlay__dislike,
-                    styles.btnIcon,
-                  )}
-                >
-                  <svg className={styles.trackPlay__dislikeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                  </svg>
-                </div>} */}
               </div>
             </div>
           </div>
