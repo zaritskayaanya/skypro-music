@@ -4,21 +4,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './nav.module.css';
 import { useState } from 'react';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { logout } from '../../store/features/authSlice';
 import { useRouter } from 'next/navigation';
 
 export default function Nav() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+  const user = useAppSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  function handleLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+  function handleLogout(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) {
     e.preventDefault();
     dispatch(logout());
     router.push('/auth/signIn');
@@ -50,23 +50,113 @@ export default function Nav() {
                 Главное
               </Link>
             </li>
-            <li className={styles.menu__item}>
-              <Link href="/music/categories/2" className={styles.menu__link}>
-                Мои треки
-              </Link>
-            </li>
-            <li className={styles.menu__item}>
-              <Link
-                onClick={handleLogout}
-                href="/auth/signIn"
-                className={styles.menu__link}
-              >
-                Выйти
-              </Link>
-            </li>
+            {user && (
+              <li className={styles.menu__item}>
+                <Link href="/music/favorite" className={styles.menu__link}>
+                  Мои треки
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className={styles.menu__item}>
+                <p onClick={handleLogout} className={styles.menu__link}>
+                  Выйти
+                </p>
+              </li>
+            )}
+            {!user && (
+              <li className={styles.menu__item}>
+                <Link href="/auth/signIn" className={styles.menu__link}>
+                  Войти
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       ) : null}
     </nav>
   );
 }
+// return (
+//     <div className={styles.centerblock__filter}>
+//       <div className={styles.filter__title}>Искать по:</div>
+
+//       {/* Фильтр по исполнителю */}
+//       <div
+//         className={classNames(styles.filter__button, {
+//           [styles.active]: isAuthorModalOpen,
+//         })}
+//         onClick={() => {
+//           if (!isAuthorModalOpen) {
+//             closeAllModals();
+//             setIsAuthorModalOpen(true);
+//           } else {
+//             setIsAuthorModalOpen(false);
+//           }
+//         }}
+//       >
+//         {getButtonText('author')}
+//         {isAuthorModalOpen && (
+//           <FilterItem
+//             items={authors} //  
+//             onSelectItem={handleSelectAuthor}
+//             // styles={{}} // Пропсы для стилизации FilterItem
+//           />
+//         )}
+//       </div>
+
+//       {/* Фильтр по году выпуска */}
+//       <div
+//         className={classNames(styles.filter__button, {
+//           [styles.active]: isYearModalOpen,
+//         })}
+//         onClick={() => {
+//           if (!isYearModalOpen) {
+//             closeAllModals();
+//             setIsYearModalOpen(true);
+//           } else {
+//             setIsYearModalOpen(false);
+//           }
+//         }}
+//       >
+//         {getButtonText('year')}
+//         {isYearModalOpen && (
+//           <FilterItem
+//             items={yearItemsForFilter} // Массив строк
+//             onSelectItem={handleSelectYear} // Ожидает строку
+//           />
+//         )}
+//       </div>
+
+//       {/* Фильтр по жанру */}
+//       <div
+//         className={classNames(styles.filter__button, {
+//           [styles.active]: isGenreModalOpen,
+//         })}
+//         onClick={() => {
+//           if (!isGenreModalOpen) {
+//             closeAllModals();
+//             setIsGenreModalOpen(true);
+//           } else {
+//             setIsGenreModalOpen(false);
+//           }
+//         }}
+//       >
+//         {getButtonText('genre')}
+//         {isGenreModalOpen && (
+//           <FilterItem
+//             items={genres} // Массив строк
+//             onSelectItem={handleSelectGenre} // Ожидает строку
+//           />
+//         )}
+//       </div>
+
+//       {/* Кнопка сброса фильтров */}
+//       {(selectedAuthor || selectedYear || selectedGenre) && ( // Показываем кнопку, только если есть активные фильтры
+//         <button onClick={handleResetFilters} className={styles.resetFiltersButton}>
+//           Сбросить фильтры
+//         </button>
+//       )}
+//     </div>
+//   );
+// }
