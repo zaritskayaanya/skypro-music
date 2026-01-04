@@ -1,13 +1,3 @@
-// import type { NextConfig } from 'next';
-
-// const nextConfig: NextConfig = {
-//   source: '/',
-//   destination: '/music/main',
-//   permanent: true,
-// };
-
-// export default nextConfig;
-
 const nextConfig = {
   reactStrictMode: true,
 
